@@ -21,6 +21,7 @@ function install_java {
 	sudo tar -zxf "${JAVA_PACKAGE}" -C /opt/jdk
         update-alternatives --install /usr/bin/java java /opt/jdk/jdk1.8.0_05/bin/java 100
         update-alternatives --install /usr/bin/javac javac /opt/jdk/jdk1.8.0_05/bin/javac 100
+#	apt-get install default-jdk
         java -version	
 }
 
@@ -59,6 +60,11 @@ function configure_log_agent {
 		sudo sed -i \
 			"s/monasca_log_api_url => \"http:\/\/127\.0\.0\.1:5607/monasca_log_api_url => \"http:\/\/${SERVICE_HOST}:5607/g" \
 			/etc/monasca/monasca-log-agent/agent.conf
+
+		  sudo sed -i \
+                        "s/keystone_api_url => \"http:\/\/127\.0\.0\.1:35357/keystone_api_url => \"http:\/\/${SERVICE_HOST}:35357/g" \
+                        /etc/monasca/monasca-log-agent/agent.conf
+
         fi
 	
 	sudo cp -f conf/monasca-log-agent.conf /etc/init/monasca-log-agent.conf
