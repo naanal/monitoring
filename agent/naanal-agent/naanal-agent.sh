@@ -35,7 +35,6 @@ function pre_configuration {
 
 	[ -d "/opt/libvirt" ] && sudo rm -r /opt/libvirt
 	mkdir /opt/libvirt
-        chown mon-agent: /opt/libvirt
 	ln -s /usr/lib/python2.7/dist-packages/libvirt.py /opt/naanal-agent/venv/lib/python2.7/
 	ln -s /usr/lib/python2.7/dist-packages/libvirt_lxc.py /opt/naanal-agent/venv/lib/python2.7/
 	ln -s /usr/lib/python2.7/dist-packages/libxml2mod.so /opt/naanal-agent/venv/lib/python2.7/
@@ -56,6 +55,7 @@ function start_agent {
 }
 
 function post_configuration {
+	chown mon-agent: /opt/libvirt
 	rm /opt/naanal-agent/venv/lib/python2.7/site-packages/monasca_agent/common/aggregator.py
         rm /opt/naanal-agent/venv/lib/python2.7/site-packages/monasca_agent/collector/checks_d/libvirt.py
         cp conf/aggregator.py /opt/naanal-agent/venv/lib/python2.7/site-packages/monasca_agent/common/aggregator.py
