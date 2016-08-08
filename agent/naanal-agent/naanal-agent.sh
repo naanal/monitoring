@@ -19,6 +19,9 @@ function install_dependency {
 	sudo apt-get -y install build-essential
 	sudo apt-get -y install libxml2-dev
 	sudo apt-get -y install libxslt1-dev
+	sudo apt-get -y install zlib1g-dev
+	sudo apt-get -y install python-pip
+	pip install virtualenv
 	cp conf/.apache.cnf /root/.apache.cnf
 }
 
